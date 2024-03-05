@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.0-M1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.aquabrim</groupId>
+	<artifactId>controller</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>controller</name>
+	<description>The Aquabrim Water Level Controller project aims to develop a robust and efficient system for
+		monitoring and controlling water levels using cutting-edge wireless technology. As part of Aquabrim&apos;s
+		commitment to innovation in water management, this project leverages the power of Spring Boot to create a
+		scalable and reliable solution tailored to various water level control applications. Key Features: Wireless
+		Connectivity: The system utilizes wireless communication protocols to enable seamless data transmission between
+		water level sensors and control units, eliminating the need for cumbersome wired connections. Real-time
+		Monitoring: Aquabrim Water Level Controller provides real-time monitoring of water levels in tanks, reservoirs,
+		and other water storage facilities. Users can access up-to-date information about water levels from anywhere,
+		facilitating timely decision-making and proactive management. Intelligent Control Algorithms: The controller
+		employs intelligent algorithms to automate water level adjustments based on predefined thresholds and
+		user-defined preferences. This ensures efficient utilization of water resources while minimizing human
+		intervention. Remote Accessibility: With a user-friendly web interface built using Spring Boot, users can
+		remotely access and manage the water level controller system from desktop computers, tablets, or smartphones.
+		This enhances convenience and accessibility, empowering users to monitor and control water levels effortlessly.
+		Scalability and Flexibility: The modular architecture of the Aquabrim Water Level Controller allows for easy
+		scalability and integration with existing water management systems. Whether deployed in agricultural,
+		industrial, or residential settings, the system can adapt to varying requirements with minimal configuration
+		changes. Data Logging and Analytics: The system includes robust data logging capabilities, enabling the storage
+		and analysis of historical water level data. By leveraging analytical insights, users can identify trends,
+		optimize water usage patterns, and implement proactive maintenance strategies. Security and Reliability:
+		Aquabrim prioritizes the security and reliability of the water level controller system. Built-in security
+		measures, including encryption and authentication mechanisms, safeguard sensitive data and ensure the integrity
+		of communications. The Aquabrim Water Level Controller project represents a milestone in the advancement of
+		water management technologies, offering a comprehensive solution for efficient, sustainable, and intelligent
+		control of water resources. By harnessing the power of Spring Boot and wireless connectivity, Aquabrim continues
+		to redefine the standards of excellence in water level monitoring and control.
+	</description>
+	<properties>
+		<java.version>21</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.12.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.12.5</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.12.5</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>
