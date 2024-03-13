@@ -21,7 +21,7 @@ public class Controller extends BaseEntity {
     private ShowSettings showSettings;
 
     @Column(unique = true)
-    private String deviceId;
+    private Integer deviceId;
 
     @Column(length = 100, nullable = false)
     private String name;
@@ -36,10 +36,10 @@ public class Controller extends BaseEntity {
     private String deviceIdTx;
 
     @Column(name = "motor_status")
-    private boolean motorStatus;
+    private int motorStatus;
 
     @Column(name = "signal_status", length = 10, nullable = false)
-    private boolean signalStatus;
+    private int signalStatus;
 
     @Column(name = "voltage", nullable = false)
     private Integer voltage;
@@ -54,25 +54,25 @@ public class Controller extends BaseEntity {
     private Integer hold;
 
     @Column(name = "voltage_status", nullable = false)
-    private boolean voltageStatus;
+    private int voltageStatus;
 
     @Column(name = "timeout_status", nullable = false)
-    private boolean timeoutStatus;
+    private int timeoutStatus;
 
     @Column(name = "on_status", length = 10, nullable = false)
-    private boolean onStatus;//controllerOnOff status discuss with dad.
+    private int onStatus;//controllerOnOff status discuss with dad.
 
     @Column(name = "flow_status", nullable = false)
-    private boolean flowStatus;
+    private int flowStatus;
 
     @Column(name = "enable_disable", nullable = false)
-    private boolean enableDisable;
+    private int enableDisable;
 
     @Column(name = "flow_protection", nullable = false)
-    private boolean flowProtection;
+    private int flowProtection;
 
     @Column(name = "motor_trigger", nullable = false)
-    private boolean motorTrigger;
+    private int motorTrigger;
 
     @Column(name = "low_leve_alarm", nullable = false)
     private Integer lowLevelAlarm;
@@ -166,7 +166,7 @@ public class Controller extends BaseEntity {
     private Integer motorOnAlarm;
 
     @Column(name = "trial_enabled", nullable = false)
-    private boolean trialEnabled;
+    private int trialEnabled;
 
     @Column(name = "timer_based", nullable = false)
     private Integer timerBased;
@@ -184,7 +184,7 @@ public class Controller extends BaseEntity {
     private String maxMotorOn;
 
     @Column(name = "comm_error_alarm", nullable = false)
-    private boolean commErrorAlarm;
+    private int commErrorAlarm;
 
     @Column(name = "max_duration_hours", nullable = false)
     private Integer maxDurationHours;

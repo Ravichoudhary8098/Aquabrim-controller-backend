@@ -2,23 +2,25 @@ package com.aquabrim.controller.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "Tank")
 public class Tank extends BaseEntity {
 
     @ManyToOne
-    @JoinColumn(name = "controller_id", nullable = false)
+    @JoinColumn(name = "controller_id", referencedColumnName = "id", nullable = false)
     private Controller controllerId;
 
     @Column(nullable = false)
     private String name;
 
     @Column(name = "sub_id", nullable = false)
-    private String subId;
+    private int subId;
 
     @Column(name = "motor_trigger", nullable = false)
     private int motorTrigger = 0;

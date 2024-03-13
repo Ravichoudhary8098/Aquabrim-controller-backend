@@ -1,12 +1,14 @@
 package com.aquabrim.controller.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
-
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Entity
+@Table(name = "temperature_history")
 public class TemperatureHistory extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "controller_id", nullable = false)

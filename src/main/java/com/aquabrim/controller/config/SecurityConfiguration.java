@@ -20,7 +20,7 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity.csrf().disable().authorizeHttpRequests(req ->
+        httpSecurity.authorizeHttpRequests(req ->
                 req.requestMatchers("/api/v1/auth/**")
                         .permitAll()
                         .anyRequest()

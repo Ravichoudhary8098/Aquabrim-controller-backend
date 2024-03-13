@@ -11,8 +11,8 @@ import java.net.Socket;
 
 @Component
 public class SocketListener {
-    private static final String CONN_HOST = "192.168.1.3";
-    private static final int CONN_PORT = 8080;
+    private static final String CONN_HOST = "aquabrim-controller-backend.vercel.app";
+    private static final int CONN_PORT = 443;
 
     @Autowired
     private SocketHandler socketHandler;
