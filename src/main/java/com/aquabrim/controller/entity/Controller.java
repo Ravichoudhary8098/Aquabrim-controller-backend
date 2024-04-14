@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "controller")
 public class Controller extends BaseEntity {
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "show_settings_id", referencedColumnName = "id")

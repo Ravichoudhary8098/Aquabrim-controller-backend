@@ -13,9 +13,9 @@ public class UserActivity extends BaseEntity {
     @JoinColumn(name = "controller_id", nullable = false)
     private Controller controller;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
 
     @Column(nullable = false)
     private String commandSent;

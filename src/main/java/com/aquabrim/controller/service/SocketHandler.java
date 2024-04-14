@@ -6,6 +6,8 @@ import com.aquabrim.controller.entity.Tank;
 import com.aquabrim.controller.entity.Timer;
 import com.aquabrim.controller.entity.UserActivity;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,8 @@ import static com.aquabrim.controller.constants.Constants.USER_ACTIVITY_RECORDS_
 @Slf4j
 public class SocketHandler {
 
+    Logger logger = LoggerFactory.getLogger(SocketHandler.class);
+
     private Map<String, Socket> device_id_to_connection;
     private Map<String, Socket> device_id_to_connection_tx;
     private final Object mutex = new Object();
@@ -41,6 +45,7 @@ public class SocketHandler {
     ConvertAndSaveService convertAndSave;
 
     public void handleRequest(Socket conn) {
+        logger.info("one socket connected...");
         int receivedBytes = 0;
         StringBuilder receivedCommand = new StringBuilder();
         boolean firstCommand = true;
@@ -55,10 +60,12 @@ public class SocketHandler {
                 conn.setSoTimeout(2000);
                 try {
                     if (in.read(buf, 0, 1) == -1) {
+                        logger.info("Connection closed due to end of stream.");
                         closeConnectionCleanMemory(conn);
                         return;
                     }
                 } catch (SocketTimeoutException e) {
+                    logger.warn("Socket timeout exception.", e);
                     if (receivedBytes > 0) {
                         closeConnectionCleanMemory(conn);
                         return;
@@ -70,6 +77,7 @@ public class SocketHandler {
 
                 int intValue = (int) buf[0];
                 if (intValue == 42 && connFromLocalServer) {
+                    logger.debug("Handling command from local server.");
                     char[] buffer = new char[1024];
                     if (in.read(buffer, 0, 1024) == -1) {
                         // Error reading
@@ -113,6 +121,7 @@ public class SocketHandler {
                     return;
                 } else {
                     connFromLocalServer = false;
+                    logger.debug("Processing received data for non-local server connection.");
                     String binaryRepresentation = Integer.toBinaryString(intValue);
                     if (binaryRepresentation.length() != 8) {
                         int paddingLength = 8 - binaryRepresentation.length();
@@ -150,12 +159,14 @@ public class SocketHandler {
                             device_id_to_connection.put(receivedCommand.substring(0, 24), conn);
                         }
                         collectDataFromDeviceUsingTCP(String.valueOf(receivedCommand));
+                        logger.info("Received command is : {}", receivedCommand);
                     }
 
                     receivedCommand.setLength(0);
                 }
             }
         } catch (IOException e) {
+            logger.error("IO exception in handleRequest", e);
             closeConnectionCleanMemory(conn);
         }
     }
@@ -202,7 +213,7 @@ public class SocketHandler {
     }
 
     private void collectDataFromDeviceUsingTCP(String inputData) {
-        System.out.println("In function collect data:");
+        logger.info("In function collect data: {}", inputData);
         System.out.println(inputData);
 
         List<String> array = new ArrayList<>();
@@ -224,20 +235,20 @@ public class SocketHandler {
 
         UserActivity userActivity = new UserActivity();
         userActivity.setController(controller);
-        userActivity.setUser(controller.getUser());
+//        userActivity.setUser(controller.getUser());
         userActivity.setCommandSent(commandHex);
         userActivity.setSentOrReceived("received");
         userActivity.setTimestamp(timestamp.toLocalDateTime());
         userActivityService.save(userActivity);
 
-        System.out.println("Preparing to parse: " + new String(inputData.getBytes(), StandardCharsets.UTF_8).trim());
+        logger.info("Preparing to parse: {}", new String(inputData.getBytes(), StandardCharsets.UTF_8).trim());
         convertAndSave.convertAndSave(idno, inputData);
 
         // Delete excess user activity records
-        List<Long> activityIds = userActivityService.getLatestActivityIds(controller.getUser());
-        if (activityIds.size() > USER_ACTIVITY_RECORDS_TO_SAVE) {
-            userActivityService.deleteRecords(activityIds.subList(USER_ACTIVITY_RECORDS_TO_SAVE, activityIds.size()));
-        }
+//        List<Long> activityIds = userActivityService.getLatestActivityIds(controller.getUser());
+//        if (activityIds.size() > USER_ACTIVITY_RECORDS_TO_SAVE) {
+//            userActivityService.deleteRecords(activityIds.subList(USER_ACTIVITY_RECORDS_TO_SAVE, activityIds.size()));
+//        }
     }
 
     public boolean searchDeviceId(String inDeviceId) {

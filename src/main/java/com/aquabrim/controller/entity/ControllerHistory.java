@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @Table(name = "controller_history")
 public class ControllerHistory extends BaseEntity {
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
 
     @Column(name = "device_id", nullable = false)
     private String deviceId;
